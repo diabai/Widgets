@@ -13,8 +13,8 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     Button btn;
-    TextView tv;
-    EditText et;
+    TextView tv, welcomeTxt;
+    int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +26,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeVars() {
-        btn = findViewById(R.id.btn1);
-        tv = findViewById(R.id.textView);
-        et = findViewById(R.id.et1);
+        btn = findViewById(R.id.btn);
+        tv = findViewById(R.id.tv);
+        welcomeTxt = findViewById(R.id.welcome_txt);
     }
 
     private void addEventToBtn() {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = et.getText().toString();
-                // Displaying the entered text;
-                Toast.makeText(MainActivity.this, "Hello "+ name, Toast.LENGTH_LONG).show();
+                tv.setText(""+ increaseCounter());
             }
         });
+    }
+
+    private int increaseCounter() {
+        return ++counter;
     }
 }
