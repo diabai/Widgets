@@ -1,4 +1,4 @@
-# greetingsapp
+# Various Android Apps.
 
 
-A basic Android application to greet its user.
+Each branch represents an Android app. The application on the main branch is an Android app that greets its user.
