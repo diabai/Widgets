@@ -3,44 +3,45 @@ package com.yiriba.widgets;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btn;
-    TextView tv, welcomeTxt;
-    int counter = 0;
+     Button conv;
+     TextView resultTxt, appName;
+     EditText editText;
+
+    private final double POUND_BASE = 2.20462;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initializeVars();
-        addEventToBtn();
+        resultTxt = findViewById(R.id.result);
+        appName = findViewById(R.id.tv_app_name);
+        editText = findViewById(R.id.edittxt);
+        conv = findViewById(R.id.btn);
 
-    }
-
-    private void initializeVars() {
-        btn = findViewById(R.id.btn);
-        tv = findViewById(R.id.tv);
-        welcomeTxt = findViewById(R.id.welcome_txt);
-    }
-
-    private void addEventToBtn() {
-        btn.setOnClickListener(new View.OnClickListener() {
+        conv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv.setText(""+ increaseCounter());
+
+                try {
+                    double kg_entered = Double.parseDouble(editText.getText().toString());
+                    resultTxt.setText("" + convertToLbs(kg_entered) + "lb");
+                } catch(Exception e) {
+                    Log.e("MainActivity", e.getMessage());
+
+                }
             }
         });
     }
 
-    private int increaseCounter() {
-        return ++counter;
+    private double convertToLbs (double kg) {
+        return kg * POUND_BASE;
     }
 }
